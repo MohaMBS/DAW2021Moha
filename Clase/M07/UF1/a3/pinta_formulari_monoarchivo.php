@@ -45,7 +45,7 @@ else{
 
 <div style="margin: 30px 10%;">
 <h3>My form</h3>
-<form action="pinta_formulari.php" method="post" id="myform" name="myform" enctype="multipart/form-data">
+<form action="pinta_formulari_monoarchivo.php" method="post" id="myform" name="myform" enctype="multipart/form-data">
 
     <label>Text</label> <input type="text" value="" size="30" maxlength="100" name="mytext" id="" /><br /><br />
 
