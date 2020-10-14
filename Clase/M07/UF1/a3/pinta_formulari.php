@@ -1,8 +1,22 @@
 <?php
 if ($_SERVER['REQUEST_METHOD']== 'POST'){
-    error_reporting(0); //Cuando no llenas un capo se queja con noticie no es ningun error solo es info, entonces para que no slaga en la pagina lo que he hecho es desactivar los mensajes de errores.
+    if (isset($_FILES)){
+        $dir_subida = 'imatges/';
+        $fichero_subido = $dir_subida . basename($_FILES['arxiu']['name']);
+        $imageFileType = strtolower(pathinfo($fichero_subido,PATHINFO_EXTENSION));
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"&& $imageFileType != "gif" ) {
+            echo "Error de formato, solo se admiten JPG, JPEG, PNG & GIF.</br>";
+        }else{
+            if (move_uploaded_file($_FILES['arxiu']['tmp_name'], $fichero_subido)) {
+                echo "El fichero es válido y se subió con éxito.</br>";
+                echo "Puedes ver el fichero haciendo click "."<a href=\"".$fichero_subido."\">aqui</a>";
+            } else {
+                echo "No se pudo subir el fichero </br>";
+            }
+        }
+    }
     if (isset($_REQUEST["mytext"]))
-        echo "Tu texto es: ";
+        echo "</br>Tu texto es: ";
         print_r($_REQUEST["mytext"]);
     if (isset($_REQUEST["myradio"]))
         echo "<br>Tu radio buton es: ";
@@ -31,7 +45,7 @@ else{
 
 <div style="margin: 30px 10%;">
 <h3>My form</h3>
-<form action="pinta_formulari.php" method="post" id="myform" name="myform">
+<form action="pinta_formulari.php" method="post" id="myform" name="myform" enctype="multipart/form-data">
 
     <label>Text</label> <input type="text" value="" size="30" maxlength="100" name="mytext" id="" /><br /><br />
 
@@ -50,11 +64,13 @@ else{
             <option value="2">item two</option>
         </optgroup>
     </select><br /><br />
+    
 
     <textarea name="mytextarea" id="" rows="3" cols="30">
 Text area
     </textarea> <br /><br />
-
+    <label for="arxiu">Arxiu  </label><input type="file" name="arxiu" id="fileToUpload">
+    </br> </br>
     <button id="mysubmit" type="submit">Submit</button><br /><br />
 
 </form>
