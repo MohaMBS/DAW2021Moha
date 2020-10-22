@@ -1,0 +1,6 @@
+AuthUserFile /var/www/html/mboughima/javascript/.htpasswd
+AuthName DirectoriProtegit
+AuthType Basic
+Require user armand
+Require user mboughima
+
