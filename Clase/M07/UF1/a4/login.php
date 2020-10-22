@@ -2,9 +2,14 @@
 session_start();
 $errormail="";
 $errorcontra="";
-
-if(!isset($_COOKIE["datos"]) || $_COOKIE["datos"]=="no"){
-    echo'<form action="" method="post">
+if (isset($_REQUEST["aceptadocookie"]) && $_REQUEST["aceptadocookie"]=="si"){
+    setcookie("datos","si", time() + 86400 * 30);
+    header('location:login.php');
+}else if (isset($_REQUEST["aceptadocookie"]) && $_REQUEST["aceptadocookie"]=="no"){
+    header('location:http://www.google.com');
+}
+if(!isset($_COOKIE["datos"])){
+    echo'<form method="post">
         <h3>Acceptas nuestras coockies?</h3>
         <input type="radio" name="aceptadocookie" value="si">
         <label for="aceptadocookie">Si.</label><br>
@@ -12,13 +17,7 @@ if(!isset($_COOKIE["datos"]) || $_COOKIE["datos"]=="no"){
         <label for="aceptadocookie">No.</label><br>
         <button type="submit">Inicicar.</button>
     </form>';
-    if ($_SERVER["REQUEST_METHOD"]== "POST"){
-        if ($_REQUEST["aceptadocookie"]=="no"){
-            header('location: www.google.com');
-        }else{
-            setcookie("datos","si", time() + 86400 * 30);
-        }
-    }
+ 
 }else{
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
         include ("auten.php");
