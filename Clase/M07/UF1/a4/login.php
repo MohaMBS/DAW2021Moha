@@ -2,11 +2,15 @@
 session_start();
 $errormail="";
 $errorcontra="";
-if (isset($_REQUEST["aceptadocookie"]) && $_REQUEST["aceptadocookie"]=="si"){
-    setcookie("datos","si", time() + 86400 * 30);
-    header('location:login.php');
-}else if (isset($_REQUEST["aceptadocookie"]) && $_REQUEST["aceptadocookie"]=="no"){
-    header('location:http://www.google.com');
+if (isset($_REQUEST["aceptadocookie"]) ){
+    if ($_REQUEST["aceptadocookie"]="si"){
+        setcookie("datos","si", time() + 86400 * 30);
+        header('location:login.php');
+    }
+}else if (isset($_REQUEST["aceptadocookie"])){
+    if ($_REQUEST["aceptadocookie"]="no"){
+        header('location:http://www.google.com');
+    }
 }
 if(!isset($_COOKIE["datos"])){
     echo'<form method="post">
@@ -22,8 +26,10 @@ if(!isset($_COOKIE["datos"])){
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
         include ("auten.php");
     }
-    if (isset($_REQUEST["error"])==1 ){
-    echo "Error de usuario o contraseña.";
+    if (isset($_REQUEST["error"])){
+        if ($_REQUEST["error"]=1){
+            echo "Error de usuario o contraseña.";
+        }
     }
     ?>
     <html lang="es">
@@ -56,7 +62,6 @@ if(!isset($_COOKIE["datos"])){
                     </div >
                     </br>
                 </div>
-                <label for="recodarpass" class="col- offset-1">Recordar contraseña.</label><input type="checkbox" id="recordarPass" name="recordarPass" value="si"> 
                 <button type="submit" class=" offset-1">Inicicar.</button>
             </from>
         </div>

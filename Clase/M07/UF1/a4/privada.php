@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 include("salir.php"); 
-if ($_SESSION["control"]==FALSE){
+if ($_SESSION["control"]=FALSE){
     header('Location: login.php?error=1');
 }else{
     echo "Bienvenido ".$_SESSION["email"]; 
