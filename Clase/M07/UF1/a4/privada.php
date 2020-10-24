@@ -18,7 +18,7 @@ if ($_SESSION["control"]==FALSE){
     <header>cabecera</header>
     <form action="privada.php" method="post" name="paginaprivada">
     <button id="inicio" type="submit" value="salir">Logout.</button>
-    <input type="hidden" id ="salir" name="salgo" value="salir">
+    <input type="hidden" id ="salgo" name="salgo" value="salir">
     </form>
     <nav>
         enlace1
