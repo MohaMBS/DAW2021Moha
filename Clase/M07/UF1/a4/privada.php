@@ -1,11 +1,13 @@
 <?php
 session_start(); 
 include("salir.php"); 
-if ($_SESSION["control"]=FALSE){
-    header('Location: login.php?error=1');
+if ($_SESSION["control"]){
+    if($_SESSION["control"]==FALSE){
+        header('Location: login.php?error=p1');
+    }
 }else{
-    echo "Bienvenido ".$_SESSION["email"]; 
-
+    echo "Bienvenido ".$_SESSION["email"];
+    echo $_SESSION["passRecordado"];
 ?>
 <html>
 <head>

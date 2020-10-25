@@ -2,6 +2,8 @@
 session_start();
 $errormail="";
 $errorcontra="";
+$emailRecoradado="";
+$passRecordado="";
 if (isset($_REQUEST["aceptadocookie"]) ){
     if ($_REQUEST["aceptadocookie"]="si"){
         setcookie("datos","si", time() + 86400 * 30);
@@ -24,11 +26,23 @@ if(!isset($_COOKIE["datos"])){
  
 }else{
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
+        if (isset($_REQUEST["recordarUs"])){
+            if ($_REQUEST["recordarUs"]){
+                $usPass=sha1($_REQUEST["contra"]);
+                $_SESSION["passRecordado"]=$usPass;
+                $_SESSION["emailRecordado"]=$usMail=$_REQUEST["email"];
+                $passRecordado="noesnada";
+                setcookie("pass",$usPass, time() + 86400 * 30);
+                sleep(0.5);
+                
+            }
+        } 
         include ("auten.php");
     }
     if (isset($_REQUEST["error"])){
-        if ($_REQUEST["error"]=1){
+        if ($_REQUEST["error"]==1){
             echo "Error de usuario o contraseña.";
+            echo"en auten";die;
         }
     }
     ?>
@@ -58,11 +72,18 @@ if(!isset($_COOKIE["datos"])){
                 <div class="form-group ">
                     <label for="inputPass3" class="col-2 control-label">Password</label>
                     <div class="col-10">
-                        <input type="password" class="form-control" id="inputEmail3" placeholder="Password" name="contra"><?=$errorcontra;?>
+                        <input type="password" class="form-control" id="inputEmail3" placeholder="Password" name="contra" value="<?=$errorcontra;?>"><?=$errorcontra;?>
                     </div >
                     </br>
                 </div>
-                <button type="submit" class=" offset-1">Inicicar.</button>
+                <div class="offset-1">
+                    <label calss="offset-1">Recordar inicio.
+                    <input type="radio" name="recordarUs" value="si">
+                    <label for="recordarUs">Si</label>
+                    <input type="radio" name="recordarUs" value="no">
+                    <label for="recordarUs">No</label>
+                    <button type="submit" class="">Inicicar.</button>
+                </div>
             </from>
         </div>
     </div>
