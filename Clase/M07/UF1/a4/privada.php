@@ -1,13 +1,11 @@
 <?php
 session_start(); 
 include("salir.php"); 
-if ($_SESSION["control"]){
-    if($_SESSION["control"]==FALSE){
-        header('Location: login.php?error=p1');
-    }
+if ($_SESSION["control"]=="KO"){
+    header('Location: login.php?error=1');
 }else{
-    echo "Bienvenido ".$_SESSION["email"];
-    echo $_SESSION["passRecordado"];
+    echo "Bienvenido ".$_SESSION["email"]; 
+
 ?>
 <html>
 <head>
@@ -20,7 +18,7 @@ if ($_SESSION["control"]){
     <header>cabecera</header>
     <form action="privada.php" method="post" name="paginaprivada">
     <button id="inicio" type="submit" value="salir">Logout.</button>
-    <input type="hidden" id ="salgo" name="salgo" value="salir">
+    <input type="hidden" id ="salir" name="salgo" value="salir">
     </form>
     <nav>
         enlace1
