@@ -1,10 +1,16 @@
 <?php
 session_start(); 
 include("salir.php"); 
-if ($_SESSION["control"]=="KO"){
+$contrl="";
+if(isset($_SESSION["control"])){
+    $contrl=$_SESSION["control"];
+}else if(isset($_COOKIE["control"])){
+    $contrl=$_COOKIE["control"];
+}
+if ($contrl=="KO"){
     header('Location: login.php?error=1');
 }else{
-    echo "Bienvenido ".$_SESSION["email"]; 
+    echo "Bienvenido "; 
 
 ?>
 <html>
