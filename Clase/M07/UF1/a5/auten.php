@@ -6,7 +6,46 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
-$usuarios=array("mohamoha144@gmail.com"=>"moha","javi@gmail.com"=>"javipuit","noelia@gmail.com"=>"noelia","rosa@gmail.com"=>"rosa","andreu@gmail.com"=>"andreu");
+if (!filter_var($_COOKIE["email"], FILTER_VALIDATE_EMAIL)) {
+    die("filtro de email");
+    $_SESSION["errormail"]="Correo no valido.";
+    unset($_COOKIE["email"]);
+    unset($_COOKIE["contra"]);
+    header("location: login.php?error=1");
+}else{
+    $_SESSION["errormail"]= "";
+}
+if (!preg_match("/^[a-zA-Z0-9' ]*$/",$_COOKIE["contra"])) {
+    $_SESSION["errorcontra"]= "Solo se permite letras y numeros como contrasñea.";
+    header("location: login.php?error=1");
+}else{
+    $_SESSION["errorcontra"]= "";
+}
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- /* $usuarios=array("mohamoha144@gmail.com"=>"moha","javi@gmail.com"=>"javipuit","noelia@gmail.com"=>"noelia","rosa@gmail.com"=>"rosa","andreu@gmail.com"=>"andreu");
     //verificar($session,$_REQUEST["email"],$_REQUEST["contra"]);
     if (empty($_REQUEST["email"]) && empty($_REQUEST["contra"])){
         header('Location: login.php?error=1');
@@ -63,5 +102,4 @@ $usuarios=array("mohamoha144@gmail.com"=>"moha","javi@gmail.com"=>"javipuit","no
             header('Location: privada.php');
         }
     } 
-
-?>
+ */ -->

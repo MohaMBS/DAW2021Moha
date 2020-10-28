@@ -1,6 +1,7 @@
 <?php
 session_start();
 include ("funcciones.php");
+//include ("auten.php");
 $errormail="";
 $errorcontra="";
 if (isset($_REQUEST["salir"])){
@@ -32,6 +33,9 @@ if(!isset($_COOKIE["datos"])){
         header('location:privada.php');
     }else{
         if ($_SERVER["REQUEST_METHOD"]== "POST"){
+            if (isset($_REQUEST["registrarse"])){
+                header("location: registro.php");
+            }
             if (isset($_REQUEST["iniciar"])){
                 if(autenticacion($_REQUEST["email"],sha1($_REQUEST["contra"]))==true){
                     $_SESSION["control"]=true;
@@ -50,7 +54,8 @@ if(!isset($_COOKIE["datos"])){
     <form method="post" name="myform">
     <label for="usu">Email: </label> <input type="text" name="email"><?if (isset($_SESSION["errormail"])){echo $_SESSION["errormail"];}?>
     <label for="pass">Password: </label> <input type="password" name="contra"><?if (isset($_SESSION["errorcontra"])){echo $_SESSION["errorcontra"];}?>
-    <button type="submit" value="true" name="iniciar">Inicicar.</button> Recordar<input type="checkbox" name="recordar" id="recordar">
+    Recordar<input type="checkbox" name="recordar" id="recordar"><button type="submit" value="true" name="iniciar">Inicicar.</button> 
+    <button type="submit" value="true" name="registrarse">Registrarse.</button> 
     </form>
     <?php
     }

@@ -1,6 +1,6 @@
 <?php
-function consultarDatos($baseDatos=""){
-    //$baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
+function consultarDatos(){
+    $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
     $baseDatos=$baseDatos;
     $listaUusuarios=(null);
     if ($baseDatos->connect_error ){
@@ -30,5 +30,18 @@ function autenticacion ($email="",$pass=""){
     }else{
         return false;
     }
+    $datos->free();
+    $baseDatos->clone();
+}
+function altaUsuario ($nom="",$email="",$pass=""){
+    $pass=sha1($pass);
+    $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
+    $sql = "INSERT INTO usuaris (id, nom, email, password, tipoCuenta) VALUES (NULL,'$nom', '$email', '$pass','user')";
+    if ($baseDatos->query($sql) === TRUE) {
+        echo "Te has registrado";
+      } else {
+        echo "Error: " . $sql . "<br>" . $baseDatos->error;
+      }
+
 }
 ?>
