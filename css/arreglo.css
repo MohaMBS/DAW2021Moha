@@ -1,0 +1,300 @@
+@media (min-width:2130px){
+    img.logo{
+        width: 450px!important;
+        height: 700px!important;
+    }
+    div.caja-web-pedidos,div.caja-web-pedidos>div {
+        margin-left: -500px;
+    }
+    div.caja-web-pedidos > div > a > img{
+        width:80px;
+        height: 80px;
+        margin-bottom: 5px;
+    }
+    div.caja-web-pedidos > div {
+        margin-bottom:50px;
+    }
+}
+
+/*=====================================================================*/
+
+@media (min-width:2400px){
+    body{
+        min-width: 600px;
+        max-width: 2400px;
+    }
+    p.texto-principal{
+        font-size: 105px !important;
+        width: 800px !important;
+    }
+    p.texto-horario{
+        font-size: 70px !important;
+        width: 800px !important;
+    }
+    h3.texto-anuncio{
+        font-size: 50px !important;
+        width: 1000px !important;
+    }
+    img.logo{
+        width: 500px!important;
+        height: 800px!important;
+    }
+    div.logos-redes-sociales{
+        width:600px!important;
+        height: 90px!important;
+    }
+    div.logos-redes-sociales > p {
+        margin-top: 5px;
+        font-size: 60px!important;
+    }
+    .dos-puntos-redes{
+        font-size:65px!important;
+    }
+    div.logos-redes-sociales > p > span > a > img {
+        width: 60px!important;
+        height: 60px!important;
+        margin-bottom: 5px;
+    }
+    .caja-informacion{
+        width: 900px;
+        font-size:  43px!important;
+    }
+    div.caja-web-pedidos,div.caja-web-pedidos>div {
+        margin-left: -500px;
+    }
+    div.caja-web-pedidos > div > a > img{
+        width:100px;
+        height: 100px;
+        margin-bottom: 5px;
+    }
+    div.caja-web-pedidos > div {
+        margin-top:30px;
+    }
+}
+
+/*=====================================================================*/
+
+@media (min-width:2560px){
+    body{
+        min-width: 600px;
+        max-width: 25600px;
+    }
+    p.texto-principal{
+        font-size: 105px !important;
+        width: 800px !important;
+    }
+    p.texto-horario{
+        font-size: 80px !important;
+        width: 800px !important;
+    }
+    h3.texto-anuncio{
+        font-size: 50px !important;
+        width: 1000px !important;
+    }
+    img.logo{
+        width: 525px!important;
+        height: 850px!important;
+    }
+    div.logos-redes-sociales{
+        width:600px!important;
+        height: 90px!important;
+    }
+    div.logos-redes-sociales > p {
+        margin-top: 5px;
+        font-size: 60px!important;
+    }
+    .dos-puntos-redes{
+        font-size:65px!important;
+    }
+    div.logos-redes-sociales > p > span > a > img {
+        width: 60px!important;
+        height: 60px!important;
+        margin-bottom: 5px;
+    }
+    .caja-informacion{
+        width: 900px;
+        font-size:  43px!important;
+    }
+    div.caja-web-pedidos,div.caja-web-pedidos>div {
+        margin-left: -600px;
+    }
+    div.caja-web-pedidos > div > a > img{
+        width:100px;
+        height: 100px;
+        margin-bottom: 5px;
+    }
+    div.caja-web-pedidos > div {
+        margin-top:30px;
+    }
+}
+
+/*=====================================================================*/
+
+ @media (min-width:2880px){
+    body{
+        min-width: 600px;
+        max-width: 2880px;
+    }
+    p.texto-principal{
+        font-size: 105px !important;
+        width: 800px !important;
+    }
+    p.texto-horario{
+        font-size: 80px !important;
+        width: 800px !important;
+    }
+    h3.texto-anuncio{
+        font-size: 50px !important;
+        width: 1000px !important;
+    }
+    img.logo{
+        width: 550px!important;
+        height: 850px!important;
+    }
+    div.logos-redes-sociales{
+        width:600px!important;
+        height: 90px!important;
+    }
+    div.logos-redes-sociales > p {
+        margin-top: 5px;
+        font-size: 60px!important;
+    }
+    .dos-puntos-redes{
+        font-size:65px!important;
+    }
+    div.logos-redes-sociales > p > span > a > img {
+        width: 60px!important;
+        height: 60px!important;
+        margin-bottom: 5px;
+    }
+    .caja-informacion{
+        width: 900px;
+        font-size:  43px!important;
+    }
+    div.caja-web-pedidos,div.caja-web-pedidos>div {
+        margin-left: -700px;
+    }
+    div.caja-web-pedidos > div > a > img{
+        width:100px;
+        height: 100px;
+        margin-bottom: 5px;
+    }
+    div.caja-web-pedidos > div {
+        margin-top:30px;
+    }
+} 
+
+
+/*=====================================================================*/
+
+ @media (min-width:3840px){
+    body{
+        min-width: 600px;
+        max-width: 3840px;
+    }
+    p.texto-principal{
+        font-size: 180px !important;
+        width: 1500px !important;
+    }
+    p.texto-horario{
+        font-size: 100px !important;
+        width: 1600px !important;
+    }
+    h3.texto-anuncio{
+        font-size: 80px !important;
+        width: 1600px !important;
+    }
+    img.logo{
+        width: 800px!important;
+        height: 1300px!important;
+    }
+    div.logos-redes-sociales{
+        width:800px!important;
+        height: 120px!important;
+    }
+    div.logos-redes-sociales > p {
+        font-size: 100px!important;
+    }
+    .dos-puntos-redes{
+        font-size:100px!important;
+    }
+    div.logos-redes-sociales > p > span > a > img {
+        width: 80px!important;
+        height: 80px!important;
+        margin-bottom: 5px;
+    }
+    .caja-informacion{
+        width: 1200px;
+        font-size:50px!important;
+    }
+    div.caja-web-pedidos{
+        margin-top: 150px;
+    }
+    div.caja-web-pedidos,div.caja-web-pedidos>div {
+        margin-left: -800px;
+    }
+    div.caja-web-pedidos > div > a > img{
+        width:180px;
+        height: 180px;
+    }
+    div.caja-web-pedidos > div {
+        margin-top:50px;
+    }
+} 
+
+/*=====================================================================*/
+
+  @media (min-width:3900px){
+    body{
+        min-width: 3900px;
+        max-width: 6000px;
+    }
+    p.texto-principal{
+        font-size: 280px !important;
+        width: 1600px !important;
+    }
+    p.texto-horario{
+        font-size: 140px !important;
+        width: 1600px !important;
+    }
+    h3.texto-anuncio{
+        font-size: 110px !important;
+        width: 2000px !important;
+    }
+    img.logo{
+        width: 1200px!important;
+        height: 1800px!important;
+    }
+    div.logos-redes-sociales{
+        width:1200px!important;
+        height: 240px!important;
+    }
+    div.logos-redes-sociales > p {
+        font-size: 150px!important;
+    }
+    .dos-puntos-redes{
+        font-size:180px!important;
+    }
+    div.logos-redes-sociales > p > span > a > img {
+        width: 190px!important;
+        height: 190px!important;
+        margin-bottom: 5px;
+    }
+    .caja-informacion{
+        width: 1600px;
+        font-size:80px!important;
+    }
+    div.caja-web-pedidos{
+        margin-top: 100px;
+    }
+    div.caja-web-pedidos,div.caja-web-pedidos>div {
+        margin-left: -1500px;
+    }
+    div.caja-web-pedidos > div > a > img{
+        width:300px;
+        height: 300px;
+    }
+    div.caja-web-pedidos > div {
+        margin-top:100px;
+    }
+}  
