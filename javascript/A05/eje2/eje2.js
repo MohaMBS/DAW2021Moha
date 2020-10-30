@@ -1,11 +1,37 @@
-if (getCookie("color")!=""){
-    let color = getCookie("color")
-    document.body.style.backgroundColor = color;
-    
+if (getCookie("color")!="" && localStorage.color!=""){
+    aplicarC = document.querySelector("#aplicarC");
+    aplicarC.addEventListener("click", (event) => { 
+        let color = getCookie("color")
+        let tamano =getCookie("size")
+        console.log(tamano)
+        document.body.style.backgroundColor = color;
+        document.images[0].width= tamano;
+        document.images[0].height= tamano;  
+    });
+
+    aplicarL = document.querySelector("#aplicarL");
+    aplicarL.addEventListener("click", (event) => { 
+        document.body.style.backgroundColor = localStorage.color;
+        document.images[0].width= localStorage.tamano;
+        document.images[0].height= localStorage.tamano;  
+    });
+
+    escullirColor = document.querySelector("#escullirC");
+    escullirColor.addEventListener("click", (event) => { 
+        window.location.replace("http://dawjavi.insjoaquimmir.cat/mboughima/javascript/A05/eje3/eje3.html");  
+    });
+    escullirColor = document.querySelector("#escullirL");
+    escullirColor.addEventListener("click", (event) => { 
+        window.location.replace("http://dawjavi.insjoaquimmir.cat/mboughima/javascript/A05/eje4/eje4.html");  
+    });
 }else{
-    escullirColor = document.querySelector("#escullir");
+    escullirColor = document.querySelector("#escullirC");
     escullirColor.addEventListener("click", (event) => { 
     window.location.replace("http://dawjavi.insjoaquimmir.cat/mboughima/javascript/A05/eje3/eje3.html");  
+    });
+    escullirColor = document.querySelector("#escullirL");
+    escullirColor.addEventListener("click", (event) => { 
+        window.location.replace("http://dawjavi.insjoaquimmir.cat/mboughima/javascript/A05/eje4/eje4.html");  
     });
 }
 

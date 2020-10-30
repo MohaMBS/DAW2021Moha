@@ -23,7 +23,8 @@ if ($contrl==false){
 <body>
     <header>cabecera</header>
     <form action="privada.php" method="post" name="paginaprivada">
-    <button id="inicio" type="submit" value="salir">Logout.</button>
+    <button name="salir" type="submit" value="salir">Logout.</button>
+    <button name="editar" type="submit" value="true">Editar mi cuenta.</button>
     <input type="hidden" id ="salir" name="salgo" value="salir">
     </form>
     <nav>

@@ -1,5 +1,4 @@
 <?php
-session_start();
 include ("funcciones.php");
 //include ("auten.php");
 $errormail="";
@@ -38,6 +37,7 @@ if(!isset($_COOKIE["datos"])){
             }
             if (isset($_REQUEST["iniciar"])){
                 if(autenticacion($_REQUEST["email"],sha1($_REQUEST["contra"]))==true){
+                    $_SESSION["email"]=$_REQUEST["email"];
                     $_SESSION["control"]=true;
                     header ("location: privada.php");
                 }else{
