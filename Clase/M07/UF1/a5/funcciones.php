@@ -33,7 +33,7 @@ function autenticacion ($email="",$pass=""){
     }else{
         return false;
     }
-    $datos->free();
+    
     $baseDatos->clone();
 }
 function altaUsuario ($nom="",$email="",$pass=""){
@@ -47,35 +47,60 @@ function altaUsuario ($nom="",$email="",$pass=""){
       }
 
 }
-function editarNombre($nombre=""){
-    $conn = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
-    $email=$_SESSION["email"];
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-    $sql = "SELECT id FROM usuaris WHERE email='$email'";
-    $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) {
-        $id=$row["id"];
-        $sql = "UPDATE usuaris SET nom='$nombre' WHERE id=$id";
-        if ($conn->query($sql) === TRUE) {
-            header("location: editarUsuario.php?edi=ok");
-          } else {
-            header("location: editarUsuario.php?error=1");
-          }
-      }
-    } else {
-      header("locaion: login.php?error=2");
-    }
-    $conn->close();
+
+function adminUser(){
+  $conn = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
+  $email = $_SESSION["email"];
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+  $sql = "SELECT tipoCuenta FROM usuaris WHERE email='$email'";
+  $result = $conn->query($sql); 
+  if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+      $id=$row["tipoCuenta"];
+    }return ($id);
+  } else {
+    header("locaion: login.php?error=2");
+  }
+  $conn->close();
 }
 
-function editarEmail($emailN=""){
-    $conn = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
+function editarNombre($nombre="",$tipoUs=""){
+  if ($tipoUs=="admin"){
+    $email=$_SESSION["emailSuper"];
+  }else{
     $email=$_SESSION["email"];
-    $_SESSION["email"]="$email";
+  }
+  $conn = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+  $sql = "SELECT id FROM usuaris WHERE email='$email'";
+  $result = $conn->query($sql);  
+  if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+      $id=$row["id"];
+      $sql = "UPDATE usuaris SET nom='$nombre' WHERE id=$id";
+      if ($conn->query($sql) === TRUE) {
+        header("location: editarUsuario.php?edi=ok");
+        } else {
+          header("location: editarUsuario.php?error=1");
+        }
+    }
+  } else {
+    header("locaion: login.php?error=2");
+  }
+  $conn->close();
+}
+
+function editarEmail($emailN="",$tipoUs=""){
+    $conn = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
+    if ($tipoUs=="admin"){
+      $email=$_SESSION["emailSuper"];
+    }else{
+      $email=$_SESSION["email"];
+    }
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
@@ -99,7 +124,11 @@ function editarEmail($emailN=""){
 }
 function editarPassword($pass=""){
     $conn = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
-    $email=$_SESSION["email"];
+    if ($tipoUs=="admin"){
+      $email=$_SESSION["emailSuper"];
+    }else{
+      $email=$_SESSION["email"];
+    }
     $passC=sha1($pass);
     $_SESSION["passC"]=$passC;
     if ($conn->connect_error) {

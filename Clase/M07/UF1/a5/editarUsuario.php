@@ -5,9 +5,10 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
       if(isset($_REQUEST["email"])){
         if(isset($_REQUEST["contra"])){
           if($_REQUEST["contra"]==$_REQUEST["contraR"]){
-            editarNombre($_REQUEST["nom"]);
-            editarEmail($_REQUEST["email"]);
-            editarPassword($_REQUEST["contra"]);
+            $_SESSION["emailSuper"]=$_REQUEST["emailSuper"];
+            editarNombre($_REQUEST["nom"],adminUser());
+            editarEmail($_REQUEST["email"],adminUser());
+            editarPassword($_REQUEST["contra"],adminUser());
             $_SESSION["errorEdicion"]="";
           }else{
             $_SESSION["errorEdicion"]="Algun campo esta mal, escriba de nueva y fijese.";
@@ -21,7 +22,9 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
     }else{
       $_SESSION["errorEdicion"]="Algun campo esta mal, escriba de nueva y fijese.";
     }
-}echo $_SESSION["passC"];
+}if(isset($_SESSION["passC"])){
+  echo $_SESSION["passC"];
+}
 ?>
 <form method="post">
   <div class="container">
@@ -35,6 +38,20 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
           </div>';
         }
       }
+      if (isset($_SESSION["errorEdicion"])){
+        if(strlen($_SESSION["errorEdicion"])>0){
+          echo '<div style="background-color:orange;">
+          <p style="color:black;">'.$_SESSION["errorEdicion"].'</p> 
+          </div>';
+        }
+      }
+      if (adminUser()=="admin"){
+        echo '<div style="background-color:gold;"> <h3>ERES ADMIN</h3> </br> 
+        <form method="post">
+        <label for="email" ><b>Email del usuario que quieres editar.</b></label>
+        <input type="text" placeholder="Escriba su email aqui." name="emailSuper" id="email" >
+        </form></div>';
+      };
     ?>
     <hr>
     <div style="text-align:auto">
