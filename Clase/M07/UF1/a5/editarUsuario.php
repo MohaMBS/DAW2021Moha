@@ -55,7 +55,10 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         }
       }
       if (adminUser()=="admin"){
-        echo '<div style="background-color:gold;"> <h3>ERES ADMIN</h3> </br> 
+        echo '<div style="background-color:#A9F5A9;"><h3>Lista de usuarios</h3>
+        '.consultarDatos().'</div>';
+        echo '<div style="background-color:gold;"> <h3>ERES ADMIN</h3>
+        <h4 style="color:red;">Si quieres modificar tus propios datos, deja este campo vacio</h4>
         <form method="post">
         <label for="email" ><b>Email del usuario que quieres editar.</b></label>
         <input type="text" placeholder="Escriba su email aqui." name="emailSuper" id="email" >

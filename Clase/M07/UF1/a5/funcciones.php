@@ -13,9 +13,9 @@ function consultarDatos(){
     }
     if ($datos->num_rows>=0){
         while ($usuari = $datos->fetch_assoc()){
-            $listaUusuarios=$usuari["id"].$usuari["nom"].$usuari["email"].$usuari["password"].$usuari["tipoCuenta"];
+            $listaUusuarios.="<strong>ID ususario: </strong>".$usuari["id"]." <strong>Nombre: </strong> ".$usuari["nom"]." <strong>Email: </strong> ".$usuari["email"]." <strong>Contraseña: </strong>".$usuari["password"]." <strong>Rol: </strong> ".$usuari["tipoCuenta"]."</br>";
         }
-    }
+    }return $listaUusuarios;
     $datos->free();
     $baseDatos->clone();
 }
