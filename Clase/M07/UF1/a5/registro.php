@@ -1,5 +1,4 @@
-<?php 
-session_start();
+<?php
 include ("funcciones.php");
 if ($_SERVER["REQUEST_METHOD"]== "POST"){
     $_SESSION["validacion"]=0;
@@ -26,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         }
     }if (isset($_SESSION["validacion"])){
         if($_SESSION["validacion"]==2){
-            altaUsuario($_REQUEST["nom"],$_REQUEST["email"],$_REQUEST["contra"]);
+            altaUsuario($_REQUEST["nom"],$_REQUEST["email"],$_REQUEST["contra"],$_REQUEST["rol"]);
         }
     }
 }
@@ -51,6 +50,11 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         </br>
         <label for="psw-repeat"><b>Repita contraseña</b></label>
         <input type="password" placeholder="Repeat Password" name="contraR" id="psw-repeat" required><?if (isset($_SESSION["errorcontra"])){echo $_SESSION["errorcontra"];}?>
+        </br>
+        </br>
+        <h5>Tipo de cuenta</h5>
+        <label>Admin</label><input type="checkbox" name="rol" value="admin"></br>
+        <label> Usuario:</label><input type="checkbox" name="rol" value="user" checked>
     </div>
     <hr>
 

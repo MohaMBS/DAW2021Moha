@@ -36,12 +36,12 @@ function autenticacion ($email="",$pass=""){
     
     $baseDatos->clone();
 }
-function altaUsuario ($nom="",$email="",$pass=""){
+function altaUsuario ($nom="",$email="",$pass="",$rol="user"){
     $pass=sha1($pass);
     $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
-    $sql = "INSERT INTO usuaris (id, nom, email, password, tipoCuenta) VALUES (NULL,'$nom', '$email', '$pass','user')";
+    $sql = "INSERT INTO usuaris (id, nom, email, password, tipoCuenta) VALUES (NULL,'$nom', '$email', '$pass','$rol')";
     if ($baseDatos->query($sql) === TRUE) {
-        echo "Te has registrado";
+        header("location: login.php?registro=ok");
       } else {
         echo "Error: " . $sql . "<br>" . $baseDatos->error;
       }

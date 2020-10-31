@@ -50,6 +50,11 @@ if(!isset($_COOKIE["datos"])){
                 echo "Error de usuario o contraseña.";
             }
         }
+    if(isset($_REQUEST["registro"])){
+        if($_REQUEST["registro"]=="ok"){
+            echo '<div style="background-color:#A9F5A9;"><h3>Has compleado de forma correcta el regitro, inicia session.</h3>';
+        }
+    }
     ?>
     <form method="post" name="myform">
     <label for="usu">Email: </label> <input type="text" name="email"><?if (isset($_SESSION["errormail"])){echo $_SESSION["errormail"];}?>
@@ -60,43 +65,4 @@ if(!isset($_COOKIE["datos"])){
     <?php
     }
 } 
-
-
-
-
-
-/* if ($_SERVER["REQUEST_METHOD"]== "POST"){
-            if (isset($_REQUEST["recordar"])){
-                $contra=sha1($_REQUEST["contra"]);
-                $email=$_REQUEST["email"];
-                setcookie("contra",$contra, time() + 86400 * 30);
-                setcookie("email",$email, time() + 86400 * 30);
-                include ("auten.php");
-            }else{
-                setcookie("contra",null, time() + 86400 * 30);
-                setcookie("email",null, time() + 86400 * 30);
-                include ("auten.php");
-            }
-        }
-        if (isset($_REQUEST["error"]) ){
-            if ($_REQUEST["error"]==1){
-                echo "Error de usuario o contraseña.";
-            }
-        } 
-=================================
-
-$baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
-        if ($baseDatos->connect_error ){
-            die ("FALLO AL CONNECTAR". $conn->connect_error);
-        }
-        $sql ="SELECT * FROM usuaris where email='mohamoha144@gmail.com' and password='9517e4957aac995ccc075fbe352e16d4e60a1087'";
-        if (!$datos = $baseDatos->query($sql)){
-            die ("error al relizar la consulta".$baseDatos->error);
-        }
-        if ($datos->num_rows>=0){
-            while ($usuari = $datos->fetch_assoc()){
-                echo $usuari["id"].$usuari["nom"].$usuari["email"].$usuari["password"].$usuari["tipoCuenta"]."<br>";
-            }
-        }
-        
-*/    ?>
+?>
