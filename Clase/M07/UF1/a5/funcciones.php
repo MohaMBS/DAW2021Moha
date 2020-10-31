@@ -58,8 +58,8 @@ function adminUser(){
   $result = $conn->query($sql); 
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-      $id=$row["tipoCuenta"];
-    }return ($id);
+      $tipoCuenta=$row["tipoCuenta"];
+    }return ($tipoCuenta);
   } else {
     header("locaion: login.php?error=2");
   }
@@ -122,7 +122,7 @@ function editarEmail($emailN="",$tipoUs=""){
     }
     $conn->close();
 }
-function editarPassword($pass=""){
+function editarPassword($pass="",$tipoUs=""){
     $conn = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
     if ($tipoUs=="admin"){
       $email=$_SESSION["emailSuper"];

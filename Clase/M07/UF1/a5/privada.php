@@ -1,11 +1,15 @@
 <?php
 session_start(); 
-include("salir.php"); 
 $contrl="";
 if(isset($_SESSION["control"])){
     $contrl=$_SESSION["control"];
 }else if(isset($_COOKIE["control"])){
     $contrl=$_COOKIE["control"];
+}
+if ($_SERVER["REQUEST_METHOD"]== "POST"){
+    if (isset($_REQUEST["salgo"])){
+        include("salir.php"); 
+    }
 }
 if ($contrl==false){
     header('Location: login.php?error=1');

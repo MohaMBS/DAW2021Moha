@@ -5,12 +5,28 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
       if(isset($_REQUEST["email"])){
         if(isset($_REQUEST["contra"])){
           if($_REQUEST["contra"]==$_REQUEST["contraR"]){
-            $_SESSION["emailSuper"]=$_REQUEST["emailSuper"];
-            editarNombre($_REQUEST["nom"],adminUser());
-            editarEmail($_REQUEST["email"],adminUser());
-            editarPassword($_REQUEST["contra"],adminUser());
-            $_SESSION["errorEdicion"]="";
+            if (isset($_REQUEST["emailSuper"])){
+              if(!empty($_REQUEST["emailSuper"])){
+                $_SESSION["emailSuper"]=$_REQUEST["emailSuper"];
+                editarNombre($_REQUEST["nom"],adminUser());
+                editarEmail($_REQUEST["email"],adminUser());
+                editarPassword($_REQUEST["contra"],adminUser());
+                $_SESSION["errorEdicion"]="";
+              }else{
+                editarNombre($_REQUEST["nom"]);
+                editarEmail($_REQUEST["email"]);
+                editarPassword($_REQUEST["contra"]);
+                $_SESSION["email"]=$_REQUEST["email"];
+                $_SESSION["errorEdicion"]="";
+              }
           }else{
+              editarNombre($_REQUEST["nom"]);
+              editarEmail($_REQUEST["email"]);
+              editarPassword($_REQUEST["contra"]);
+              $_SESSION["email"]=$_REQUEST["email"];
+              $_SESSION["errorEdicion"]="";
+          }
+        }else{
             $_SESSION["errorEdicion"]="Algun campo esta mal, escriba de nueva y fijese.";
           }
         }else{
@@ -31,13 +47,6 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
     <h1>Edicion de cuenta.</h1>
     <p>Modifique sus datos aqui abajo.</p>
     <?php 
-      if (isset($_SESSION["errorEdicion"])){
-        if(strlen($_SESSION["errorEdicion"])>0){
-          echo '<div style="background-color:orange;">
-          <p style="color:black;">'.$_SESSION["errorEdicion"].'</p> 
-          </div>';
-        }
-      }
       if (isset($_SESSION["errorEdicion"])){
         if(strlen($_SESSION["errorEdicion"])>0){
           echo '<div style="background-color:orange;">
