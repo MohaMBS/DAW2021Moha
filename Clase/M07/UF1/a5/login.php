@@ -55,13 +55,29 @@ if(!isset($_COOKIE["datos"])){
             echo '<div style="background-color:#A9F5A9;"><h3>Has compleado de forma correcta el regitro, inicia session.</h3>';
         }
     }
+    if(isset($_SESSION["edi"])){
+        if($_SESSION["edi"]=="ok"){
+            setcookie("recuperacionActiva","", time() - 3600); 
+            unset($_COOKIE["recuperacionActiva"]);
+            echo '<div style="background-color:#A9F5A9;"><h3>Se ha cambiado la contraseña de forma correcta.</h3>';
+        }
+    }
+    if(isset($_REQUEST["enviado"])){
+        if($_REQUEST["enviado"]=="ok"){
+            echo '<div style="background-color:#A9F5A9;"><h3>Revisa tu email, para seguir con el proceso de recuperacion.</h3>';
+        }
+    }
     ?>
-    <form method="post" name="myform">
-    <label for="usu">Email: </label> <input type="text" name="email"><?if (isset($_SESSION["errormail"])){echo $_SESSION["errormail"];}?>
-    <label for="pass">Password: </label> <input type="password" name="contra"><?if (isset($_SESSION["errorcontra"])){echo $_SESSION["errorcontra"];}?>
-    Recordar<input type="checkbox" name="recordar" id="recordar"><button type="submit" value="true" name="iniciar">Inicicar.</button> 
-    <button type="submit" value="true" name="registrarse">Registrarse.</button> 
-    </form>
+    <div style="margin:15% 0% 0% 25%;border:5pxsolid#FFFF00;">
+        <form method="post" name="myform">
+        <label for="usu">Email: </label> <input type="text" name="email"><?if (isset($_SESSION["errormail"])){echo $_SESSION["errormail"];}?>
+        <label for="pass">Password: </label> <input type="password" name="contra"><?if (isset($_SESSION["errorcontra"])){echo $_SESSION["errorcontra"];}?>
+        Recordar<input type="checkbox" name="recordar" id="recordar"><button type="submit" value="true" name="iniciar">Inicicar.</button> 
+        <button type="submit" value="true" name="registrarse">Registrarse.</button> 
+        </br>
+        <p>Haz click <a href="recuperar.php">aqui</a> si has olvidado tu contraseña.</p>
+        </form>
+    </div>
     <?php
     }
 } 

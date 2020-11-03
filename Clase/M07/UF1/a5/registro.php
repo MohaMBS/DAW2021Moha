@@ -25,7 +25,11 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         }
     }if (isset($_SESSION["validacion"])){
         if($_SESSION["validacion"]==2){
-            altaUsuario($_REQUEST["nom"],$_REQUEST["email"],$_REQUEST["contra"],$_REQUEST["rol"]);
+            if (!exsiste($_REQUEST["email"])){
+                altaUsuario($_REQUEST["nom"],$_REQUEST["email"],$_REQUEST["contra"],$_REQUEST["rol"]);
+            }else{
+                echo '<div style:"background-color:gold;"><h3 style="color:red;">ESE CORREO NO SE ENCUETRA DISPONIBLE</h3></div>';
+            }
         }
     }
 }
@@ -53,8 +57,8 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         </br>
         </br>
         <h5>Tipo de cuenta</h5>
-        <label>Admin</label><input type="checkbox" name="rol" value="admin"></br>
-        <label> Usuario:</label><input type="checkbox" name="rol" value="user" checked>
+        <label>Admin</label><input type="checkbox" name="rol" value="99"></br>
+        <label> Usuario:</label><input type="checkbox" name="rol" value="98" checked>
     </div>
     <hr>
 

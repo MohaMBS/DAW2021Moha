@@ -8,23 +8,26 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
             if (isset($_REQUEST["emailSuper"])){
               if(!empty($_REQUEST["emailSuper"])){
                 $_SESSION["emailSuper"]=$_REQUEST["emailSuper"];
-                editarNombre($_REQUEST["nom"],adminUser());
-                editarEmail($_REQUEST["email"],adminUser());
-                editarPassword($_REQUEST["contra"],adminUser());
-                $_SESSION["errorEdicion"]="";
-              }else{
-                editarNombre($_REQUEST["nom"]);
-                editarEmail($_REQUEST["email"]);
-                editarPassword($_REQUEST["contra"]);
-                $_SESSION["email"]=$_REQUEST["email"];
-                $_SESSION["errorEdicion"]="";
+                if(!exsiste($_REQUEST["email"]) || $_REQUEST["email"]==$_REQUEST["emailSuper"]){
+                  if(!$_REQUEST["email"]==""){
+                    editarCuenta($_REQUEST["nom"],$_REQUEST["email"],$_REQUEST["contra"],adminUser());
+                    $_SESSION["errorEdicion"]="";
+                  }else{
+                    $_SESSION["errorEdicion"]="Debes de introducir un email valido...";
+                  }
+                }else{
+                  $_SESSION["errorEdicion"]="No puedes usar un correo que ya se este usando...";
+                }
               }
           }else{
-              editarNombre($_REQUEST["nom"]);
-              editarEmail($_REQUEST["email"]);
-              editarPassword($_REQUEST["contra"]);
+            if(!exsiste($_REQUEST["email"]) || $_REQUEST["email"]==$_SESSION["email"]){
+              editarCuenta($_REQUEST["nom"],$_REQUEST["email"],$_REQUEST["contra"],adminUser());
               $_SESSION["email"]=$_REQUEST["email"];
               $_SESSION["errorEdicion"]="";
+            }else{
+              $_SESSION["errorEdicion"]="No puedes usar un correo que ya se este usando...";
+            }
+              
           }
         }else{
             $_SESSION["errorEdicion"]="Algun campo esta mal, escriba de nueva y fijese.";
