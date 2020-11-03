@@ -42,6 +42,35 @@ function exsiste ($email){
   
   $baseDatos->clone();
 }
+
+function eliminar($email){
+  $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
+    if ($baseDatos->connect_error ){
+        die ("FALLO AL CONNECTAR". $baseDatos->connect_error);
+    }
+    $control ="SELECT * FROM usuaris where email='$email'";
+    if (!$datos = $baseDatos->query($control)){
+        die ("error al relizar la consulta".$baseDatos->error);
+    }
+    $result = $baseDatos->query($control);
+    if ($result->num_rows == 1){
+      while ($usuari = $datos->fetch_assoc()){  
+        $id=$usuari["id"];
+        if($id>=0){
+          $sql = "DELETE FROM usuaris WHERE id=$id";
+          if ($baseDatos->query($sql) === TRUE) {
+            return true;
+          } else {
+            die("Error al cambiar las contraseña");
+          }
+        }
+      }
+    }else{
+      die("Error al cambiar las contraseña");
+    }
+    $baseDatos->close();
+}
+
 function autenticacion ($email,$pass){
     $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
     if ($baseDatos->connect_error ){

@@ -1,7 +1,20 @@
 <?php 
 include ("funcciones.php");
+$_SESSION["errorEdicion"]="";
+$_SESSION["msgEdi"]="";
 if ($_SERVER["REQUEST_METHOD"]== "POST"){
-    if(isset($_REQUEST["nom"])){
+    if(isset($_REQUEST["emailF"])){
+      if($_REQUEST["emailF"]!=$_SESSION["email"]){
+        if(exsiste($_REQUEST["emailF"])){
+          $_SESSION["msgEdi"]="Se ha eliminado la cuenta con el siguente email: ".$_REQUEST["emailF"];
+          eliminar($_REQUEST["emailF"]);
+        }else{
+          $_SESSION["errorEdicion"].="No se encuentra el correo que desea elimnar...";
+        } 
+      }else{
+        $_SESSION["msgEdi"].="No no te puedes auto eliminar";
+      }
+    }else if(isset($_REQUEST["nom"])){
       if(isset($_REQUEST["email"])){
         if(isset($_REQUEST["contra"])){
           if($_REQUEST["contra"]==$_REQUEST["contraR"]){
@@ -57,6 +70,13 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
           </div>';
         }
       }
+      if (isset($_SESSION["msgEdi"])){
+        if(strlen($_SESSION["msgEdi"])>0){
+          echo '<div style="background-color:green;">
+          <p style="color:black;">'.$_SESSION["msgEdi"].'</p> 
+          </div>';
+        }
+      }
       if (adminUser()=="admin"){
         echo '<div style="background-color:#A9F5A9;"><h3>Lista de usuarios</h3>
         '.consultarDatos().'</div>';
@@ -65,7 +85,15 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         <form method="post">
         <label for="email" ><b>Email del usuario que quieres editar.</b></label>
         <input type="text" placeholder="Escriba su email aqui." name="emailSuper" id="email" >
+        </form></div>'.'<div style="background-color:orange;">
+        <h4 style="color:red;">Seccion para eliminar:</h4>
+        <form method="post">
+        <label for="email" ><b>Email del usuario que quieres elimnar.</b></label>
+        <input type="text" placeholder="Escriba su email aqui." name="emailF" id="email" ><input type="submit" value="Eliminar">
         </form></div>';
+        ?>
+        <div style="background-color:aqua;"><h4>Haz click <a href="registro.php">aqui</a> para poder dar de alta a un nuevo ususario.</h4></div>
+      <?php
       };
     ?>
     <hr>

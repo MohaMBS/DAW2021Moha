@@ -56,16 +56,30 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         <input type="password" placeholder="Repeat Password" name="contraR" id="psw-repeat" required><?if (isset($_SESSION["errorcontra"])){echo $_SESSION["errorcontra"];}?>
         </br>
         </br>
+        <?php
+        if(isset($_SESSION["email"])){
+            if(adminUser()=="admin"){
+        ?>
         <h5>Tipo de cuenta</h5>
         <label>Admin</label><input type="checkbox" name="rol" value="99"></br>
         <label> Usuario:</label><input type="checkbox" name="rol" value="98" checked>
+        <?php
+            }
+        }
+        ?>
     </div>
     <hr>
 
     <button type="submit" name="register">Register</button>
   </div>
-  
+  <?php 
+  if(!isset($_SESSION["email"])){
+  ?>
   <div class="container signin">
     <p>Already have an account? <a href="login.php" name="tengoCuenta">Sign in</a>.</p>
   </div>
+  <?php
+    
+}
+  ?>
 </form>
