@@ -2,6 +2,10 @@
 include ("funcciones.php");
 $_SESSION["errorEdicion"]="";
 $_SESSION["msgEdi"]="";
+if(!isset($_SESSION["control"])){
+  echo 'Haga click <a href="login.php">aqui</a> para poder iniciar session </br>';
+  die("Enicie la session antes de editar");
+}
 if ($_SERVER["REQUEST_METHOD"]== "POST"){
     if(isset($_REQUEST["emailF"])){
       if($_REQUEST["emailF"]!=$_SESSION["email"]){
