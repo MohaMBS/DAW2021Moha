@@ -61,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
             if(adminUser()=="admin"){
         ?>
         <h5>Tipo de cuenta</h5>
-        <label>Admin</label><input type="checkbox" name="rol" value="99"></br>
-        <label> Usuario:</label><input type="checkbox" name="rol" value="98" checked>
+        <label>Admin</label><input type="radio" name="rol" value="99"></br>
+        <label> Usuario:</label><input type="radio" name="rol" value="98" checked>
         <?php
             }
         }
