@@ -4,9 +4,8 @@ require './phpmailer/src/PHPMailer.php';
 require './phpmailer/src/SMTP.php';
 require './phpmailer/src/Exception.php';
 require './phpmailer/src/OAuth.php';
-$_SESSION["errormailR"]="";
-$_SESSION["errorPass"]= "";
-if ($_SERVER["REQUEST_METHOD"]== "POST"){  
+if ($_SERVER["REQUEST_METHOD"]== "POST"){ 
+
     if (isset($_REQUEST["emailR"])){
         if (exsiste($_REQUEST["emailR"])){
             setcookie("recuperacionActiva",$_REQUEST['emailR'], time() + 86400/2);
@@ -35,10 +34,13 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
             
             }
         }else{
+            header("location: recuperar.php");
             $_SESSION["errormailR"]="Ese correo, no esta registrado.";
         }
-    }else{
-        $_SESSION["errormailR"]="Debe introducir el correo.";
+        if (strlen($_REQUEST["emailR"])<=1){
+            header("location: recuperar.php");
+            $_SESSION["errormailR"]="Debe introducir el correo.";        
+        }
     }
 }
 else{

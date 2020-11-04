@@ -1,12 +1,13 @@
 <?php
 include ("funcciones.php");
-//include ("auten.php");
 $errormail="";
 $errorcontra="";
 if (isset($_REQUEST["salir"])){
     if($_REQUEST["salir"] == "cookie"){
         unset($_COOKIE["email"]);
+        setcookie("email","", time() - 3600); 
         unset($_COOKIE["contra"]);
+        setcookie("contra","", time() - 3600); 
     }
 }
 if (isset($_REQUEST["aceptadocookie"])){
@@ -29,9 +30,18 @@ if(!isset($_COOKIE["datos"])){
  
 }else{
     if (isset($_COOKIE["contra"])){
-        header('location:privada.php');
+        if(isset($_COOKIE["contra"])){
+            header('location:privada.php'); 
+        }
     }else{
         if ($_SERVER["REQUEST_METHOD"]== "POST"){
+            if (isset($_REQUEST["recordar"])){
+                if(autenticacion($_REQUEST["email"],sha1($_REQUEST["contra"]))==true){
+                    setcookie("contra",sha1($_REQUEST["contra"]), time() + 86400 * 30);
+                    setcookie("email",$_REQUEST["email"], time() + 86400 * 30);
+                    header("location: privada.php");
+                }
+            }
             if (isset($_REQUEST["registrarse"])){
                 header("location: registro.php");
             }
