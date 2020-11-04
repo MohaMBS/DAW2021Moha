@@ -88,7 +88,7 @@ function autenticacion ($email,$pass){
     
     $baseDatos->close();
 }
-function altaUsuario ($nom,$email,$pass,$rol="user"){
+function altaUsuario ($nom,$email,$pass,$rol="98"){
     $pass=sha1($pass);
     $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
     $sql = "INSERT INTO usuaris (id, nom, email, password, tipoCuenta) VALUES (NULL,'$nom', '$email', '$pass','$rol')";

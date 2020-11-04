@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
     }if (isset($_SESSION["validacion"])){
         if($_SESSION["validacion"]==2){
             if (!exsiste($_REQUEST["email"])){
-                altaUsuario($_REQUEST["nom"],$_REQUEST["email"],$_REQUEST["contra"],$_REQUEST["rol"]);
+                altaUsuario($_REQUEST["nom"],$_REQUEST["email"],$_REQUEST["contra"],"98");
             }else{
                 echo '<div style:"background-color:gold;"><h3 style="color:red;">ESE CORREO NO SE ENCUETRA DISPONIBLE</h3></div>';
             }
