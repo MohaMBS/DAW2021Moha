@@ -102,10 +102,30 @@ if(!isset($_COOKIE["datos"])){
             </tr>
             <tr style="background-color:grey;">
                 <td><p style="font-weight: bold;">Vols buscar un producte:</p></td>
-                <td colspan="3"><form method="post"> <input style="width: 50%;" type="text" name="buscarP" placeholder="Escriu el nom...">
-                    <input style="margin-left:15px;" type="submit"value="Buscar."><input style="margin-left:15px;" type="submit"value="Borrar busqueda." name="borarB"><form></td>
+                <td colspan="3"><form method="post"> 
+                    <input style="" type="text" name="buscarP" placeholder="Escriu el nom...">
+                    <label for="BuscadorCategoria">O PUEDES BUSCAR POR SOLO CATERGORIA</label>
+                    <select name="buscarPc">
+                        <option value="">Selecionar...</option>
+                        <option value="TECNOLOGIA">TECNOLOGIA</option>
+                        <option value="COMIDA">COMIDA</option>
+                        <option value="INTERNET">INTERNET</option>
+                        <option value="OTRO">OTRO</option>
+                    </select>
+                    <input style="margin-left:15px;" type="submit"value="Buscar."><input style="margin-left:15px;" type="submit"value="Borrar busqueda." name="borarB">
+                    </form></td>
                     <?if ($_SERVER["REQUEST_METHOD"]== "POST"){
-                        if(isset($_REQUEST["buscarP"])){
+                        $flag=false;
+                        if (isset($_REQUEST["buscarPc"])){
+                            if($_REQUEST["buscarPc"]!=""){
+                                $flag=true;
+                                echo '<tr style="background-color:grey;"><td><h3>Nom</h3></td>
+                                <td><h3>descripcio</h3></td>
+                                <td><h3>Imatge</h3></td>
+                                <td><h3>Preu</h3></td>
+                                <td><h3>Categoria</h3></td></tr>'.BuscarPro($_REQUEST["buscarPc"]);
+                            }
+                        }if(isset($_REQUEST["buscarP"])){   
                             if(!empty($_REQUEST["buscarP"])){
                                 echo '<tr style="background-color:grey;"><td><h3>Nom</h3></td>
                                 <td><h3>descripcio</h3></td>
@@ -116,8 +136,8 @@ if(!isset($_COOKIE["datos"])){
                                     echo '<p style="color:red;">Es articulo no esta en nuestra basde de datos</p>';
                                 };
                             }else if (empty($_REQUEST["buscarP"])){
-                                if(!isset($_REQUEST["borarB"])){
-                                    echo '<p style="color:orange;">Escriba el nombre para poder relizar la busqueda.<p>';
+                                if($flag==false && !isset($_REQUEST["borarB"])){
+                                    echo '<p style="color:orange;">Escriba el nombre o seleccione la categoria para poder relizar la busqueda.<p>';
                                 }
                                 
                             }

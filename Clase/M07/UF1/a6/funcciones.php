@@ -234,13 +234,13 @@ function BuscarPro($nom){
   if ($baseDatos->connect_error ){
     die ("FALLO AL CONNECTAR". $conn->connect_error);
   }
-  $sql="SELECT productes.nom,productes.descripcio,imatges.ruta,productes.preu,productes.id FROM imatges INNER JOIN productes on productes.id = imatges.id_producto WHERE productes.nom like '%".$nom."%' or productes.descripcio like '%".$nom."%' ";
+  $sql="SELECT productes.nom, productes.descripcio, imatges.ruta,productes.preu, productes.id,categorias.nom as nomc from imatges INNER JOIN productes on productes.id=imatges.id_producto INNER JOIN categoriaProducto on categoriaProducto.id_producto=productes.id INNER JOIN categorias on categorias.id=categoriaProducto.id_categoria WHERE productes.nom like '%".$nom."%' or productes.descripcio like '%".$nom."%' or categorias.nom like '%".$nom."%'";
   if (!$datos = $baseDatos->query($sql)){
     die ("error al relizar la consulta ".$baseDatos->error);
   }
   if ($datos->num_rows>0){
     while ($usuari = $datos->fetch_assoc()){
-      $listaProductos.='<tr style="background-color:grey;"><td>'.$usuari["nom"]."</td>"."<td>".$usuari["descripcio"]."</td>"."<td> <img src='".$usuari["ruta"]."'></td>"."<td>".$usuari["preu"]."€"."</td>"."<td>".SaberCate($usuari["id"]) ."</td></tr>";
+      $listaProductos.='<tr style="background-color:grey;"><td>'.$usuari["nom"]."</td>"."<td>".$usuari["descripcio"]."</td>"."<td> <img src='".$usuari["ruta"]."'></td>"."<td>".$usuari["preu"]."€"."</td>"."<td>".$usuari["nomc"]."</td></tr>";
     }
   }else{
     $listaProductos=false;
@@ -369,6 +369,21 @@ function AsignarCategoria($idCat,$idPro){
   $baseDatos->close();
 }
 
+// function BuscarProCat($idCat){
+//   $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5'); 
+//   $resultado=(null);
+//   $sql="SELECT productes.nom,productes.descripcio,productes.preu,productes.id,categorias.nom as nomc FROM categorias INNER JOIN productes WHERE categorias.id=$idCat";
+//   if (!$datos = $baseDatos->query($sql)){
+//     die ("error al relizar la busquedas por categorias BuscarProCat()".$baseDatos->error);
+//   }
+//   if ($datos->num_rows>0){
+//     while ($usuari = $datos->fetch_assoc()){
+//       $resultado.='<tr>'.'<td>'.$usuari["nom"].'</td>'.'<td>'.$usuari["nom"].'</td>'.'<td>'.'</td>'.'<td>'.'</td>'.'<td>'.'</td>'.'<td>'.'</td>'.'<td>'.'</td>'.'<td>'.'</td>'.'</tr>'
+//     }
+//   }
+//   return $resultado;
+// }
+
 function SaberCate($idPro=""){
   $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
   $usId=-1;
@@ -379,7 +394,7 @@ function SaberCate($idPro=""){
   if (!$datos = $baseDatos->query($sql)){
       die ("error al relizar la consulta categorias nom".$baseDatos->error);
   }
-  if ($datos->num_rows>=0){
+  if ($datos->num_rows>0){
       while ($usuari = $datos->fetch_assoc()){
         $usId=$usuari["nom"];
       }
@@ -450,6 +465,4 @@ function PropitarioPro($idUs,$idPro){
   return $resultado;
   $baseDatos->close();
 }
-/* Para sacar la id del prodcut SELECT id FROM `imatges` WHERE id_producto=5*/
-/**SELECT categorias.nom,categoriaProducto.id_categoria, categoriaProducto.id_producto FROM categoriaProducto INNER JOIN categorias on categoriaProducto.id_categoria=categorias.id where categoriaProducto.id_producto=40 */
 ?>
