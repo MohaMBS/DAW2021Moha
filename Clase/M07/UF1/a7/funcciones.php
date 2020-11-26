@@ -148,7 +148,7 @@ function editarCuenta($nom,$emailN,$pass,$tipoUs=""){
   }$conn->close();
 }
 
-function recuperacionPass($email,$pass){
+function recuperacionPass($email,$pass,$token){
   $passC=sha1($pass);
   $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
     if ($baseDatos->connect_error ){
@@ -164,6 +164,8 @@ function recuperacionPass($email,$pass){
         $id=$usuari["id"];
         if($id>=0){
           $sql = "UPDATE usuaris SET password='$passC' WHERE id=$id";
+          $sql2 = "UPDATE recuperacionUser SET usado=1 WHERE token_user='$token'";
+          $baseDatos->query($sql2);
           if ($baseDatos->query($sql) === TRUE) {
             header("location: login.php?edi=ok");
           } else {
@@ -235,7 +237,11 @@ function ProductosUs($userRegsitrado="no",$idUs="null",$accion="ver",$rol="user"
             $listaProductos.="<tr><td>".$usuari["nom"]."</td>"."<td>".$usuari["descripcio"]."</td>"."<td> <img src='".$usuari["ruta"]."'></td>"."<td>".$usuari["preu"]."€"."</td>"."<td>".SaberCate($usuari["id"])."</td>".'<td> <small style="color:red;">Fuera de stock</small></td>'."</tr>";
           }
         }else{
-          $listaProductos.="<tr><td>".$usuari["nom"]."</td>"."<td>".$usuari["descripcio"]."</td>"."<td> <img src='".$usuari["ruta"]."'></td>"."<td>".$usuari["preu"]."€"."</td>"."<td>".$usuari["id"]."</td>"."<td>".SaberCate($usuari["id"])."</td>".'<td><a style="color: red;" name="deleteId" href="eliminarp.php?delete='.$usuari["id"].'">Borrar</a>'.'<td><a style="color: green;" name="ediId" href="eliminarp.php?edit='.$usuari["id"].'">Edit</a>'."</td>"."</tr>";  
+          if(Stock($usuari["id"])==true){
+            $listaProductos.="<tr><td>".$usuari["nom"]."</td>"."<td>".$usuari["descripcio"]."</td>"."<td> <img src='".$usuari["ruta"]."'></td>"."<td>".$usuari["preu"]."€"."</td>"."<td>".$usuari["id"]."</td>"."<td>".SaberCate($usuari["id"])."</td>".'<td><a style="color: red;" name="deleteId" href="eliminarp.php?delete='.$usuari["id"].'">Borrar</a>'.'<td><a style="color: green;" name="ediId" href="eliminarp.php?edit='.$usuari["id"].'">Edit</a>'."</td>"."</tr>";  
+          }else{
+            $listaProductos.="<tr><td>".$usuari["nom"]."</td>"."<td>".$usuari["descripcio"]."</td>"."<td> <img src='".$usuari["ruta"]."'></td>"."<td>".$usuari["preu"]."€"."</td>"."<td>".$usuari["id"]."</td>"."<td>".SaberCate($usuari["id"])."</td>".'<td>Vendido'."</td>"."</tr>";
+          }
         }
       } 
     }
@@ -263,7 +269,7 @@ function BuscarPro($nom="",$userRegsitrado=false,$idPro=""){
   if ($datos->num_rows>0){
     while ($usuari = $datos->fetch_assoc()){
       if($userRegsitrado==true){
-        $listaProductos.='<tr style="background-color:grey;"><td>'.$usuari["nom"]."</td>"."<td>".$usuari["descripcio"]."</td>"."<td> <img src='".$usuari["ruta"]."'></td>"."<td>".$usuari["preu"]."€"."</td>"."<td>".$usuari["nomc"]."</td></tr>";
+        $listaProductos.='<tr style="background-color:grey;"><td>'.$usuari["nom"]."</td>"."<td>".$usuari["descripcio"]."</td>"."<td> <img src='".$usuari["ruta"]."'></td>"."<td>".$usuari["preu"]."€"."</td>"."<td>".$usuari["nomc"]."</td><td><a href=\"bc.php?id=".$idPro."\">Borrar</a></td></tr>";
       }else{
         $listaProductos.='<tr style="background-color:grey;"><td>'.$usuari["nom"]."</td>"."<td>".$usuari["descripcio"]."</td>"."<td> <img src='".$usuari["ruta"]."'></td>"."<td>".$usuari["preu"]."€"."</td>"."<td>".$usuari["nomc"]."</td></tr>";  
       }
@@ -566,15 +572,50 @@ function noRepetirToken($token){
   return $res;
 }
 
-function permisoRecuperacion($token,$email){
-  $res=false;
+
+function temps($fecha){
+  $res=0;
+  $dataActual=date("Y-m-d H:i:s");
   $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
-  $sql="SELECT * FROM recuperacionUser WHERE token_user='$token' and email_us ='$email'";
+  $sql="SELECT TIMESTAMPDIFF(MINUTE,'$fecha','$dataActual') as date_difference";
+  if (!$datos = $baseDatos->query($sql)){
+    die ("error al relizar la consulta ".$baseDatos->error);
+  }
   if (!$datos = $baseDatos->query($sql)){
     die ("error al relizar la consulta ".$baseDatos->error);
   }
   if ($datos->num_rows==1){
-    $res=true;
+    while ($usuari = $datos->fetch_assoc()){
+      $res=$usuari["date_difference"];
+    }
+  }
+  return $res;
+}
+
+function permisoRecuperacion($token,$email,$hora=false){
+  $res=false;
+  $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
+  if($hora==false){
+    $sql="SELECT * FROM recuperacionUser WHERE token_user='$token' and email_us ='$email'";  
+  }else{
+    $sql="SELECT fecha FROM recuperacionUser WHERE token_user='$token' and email_us ='$email' and usado=0";
+  }
+  if (!$datos = $baseDatos->query($sql)){
+    die ("error al relizar la consulta ".$baseDatos->error);
+  }
+  if ($datos->num_rows==1){
+    if($hora==false){
+      $res=true;
+    }else{
+      while ($usuari = $datos->fetch_assoc()){
+        $hora=$usuari["fecha"];
+        if(temps($hora)>120){
+          $res=false;
+        }else{
+          $res=true;
+        }
+      }
+    }
   }
   $baseDatos->close();
   return $res;
@@ -583,7 +624,7 @@ function permisoRecuperacion($token,$email){
 function guardarRecuperacion($email,$token){
   $resultado=false;
   $baseDatos = new mysqli('localhost', 'mboughima', 'mboughima', 'mboughima_a5');
-  $sql="INSERT INTO recuperacionUser (email_us, token_user, data) VALUES ('$email', '$token', CURRENT_TIMESTAMP)";
+  $sql="INSERT INTO recuperacionUser (email_us, token_user, fecha) VALUES ('$email', '$token', CURRENT_TIMESTAMP)";
   if ($baseDatos->connect_error ){
     die ("FALLO AL CONNECTAR". $conn->connect_error);
   }
@@ -664,5 +705,10 @@ function comprovarVentas($tabla,$ganado=false){
     $x=$listaProductos;
   }
   return $x;
+}
+
+function buscadorLista($lista,$valor){
+  $pos = strrpos($lista, $valor);
+  return $pos;
 }
 ?>

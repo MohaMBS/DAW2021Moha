@@ -9,9 +9,9 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
 
     if (isset($_REQUEST["emailR"])){
         if (exsiste($_REQUEST["emailR"])){
-            $token=randomPassword(99,true);
+            $token=randomPassword();
             while (noRepetirToken($token)==false){
-                $token=randomPassword(99,true);
+                $token=randomPassword();
             } 
             setcookie("email",$_REQUEST['emailR'], time() +7200);
             setcookie("emailToken",$token, time() +7200);

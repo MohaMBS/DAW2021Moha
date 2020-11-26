@@ -19,11 +19,8 @@ while(comprovarIdPrivado($_SESSION["identificadorCompraPrivada"])==true){
 }
 
 $YOUR_DOMAIN = 'http://dawjavi.insjoaquimmir.cat';
-$precio=0;
-foreach ($_SESSION["carritoUser"] as $value){
-  $precio+=buscarPrecio($value);
-  $precio=intval(str_replace(',','.',$precio));
-}
+$precio=0.00;
+$precio=intval(str_replace(',','.',$_SESSION["precioPagar"]));
 $precioFinal=($precio*100);
 
 $checkout_session = \Stripe\Checkout\Session::create([
@@ -34,7 +31,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
       'unit_amount' => $precioFinal,
       'product_data' => [
         'name' => 'MOHA LA TIENDA DE CONFINAZA REFERENCIA DE LA COMPRA: '.$_SESSION["identificadorCompraPublica"],
-        'images' => ["https://i.imgur.com/EHyR2nP.png"],
+        'images' => ["https://i.postimg.cc/XvHJ0DYy/Ctl3Of1.gif"],
       ],
     ],
     'quantity' => 1,

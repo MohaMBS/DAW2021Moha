@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD']== 'POST'){
     <label for="Descripcion">Descripcion del producto:</label></textarea><?if (isset($_SESSION["msgNDes"])){echo $_SESSION["msgNDes"];}?>
     <textarea type="textbox" id="Descripcion" name="desp"></textarea><br><br>
     <label for="preup">Preu del producte:</label><?if (isset($_SESSION["msgNPre"])){echo $_SESSION["msgNPre"];}?>
-    <input type="text" name="preup">
+    <input type="number" name="preup" min="0" step="0.01">
     <label>Categoria</label><?if (isset($_SESSION["msgNCat"])){echo $_SESSION["msgNCat"];}?>
     <input type="radio"name="categoria" value="1">
     <label for="male">TECNOLOGIA</label>

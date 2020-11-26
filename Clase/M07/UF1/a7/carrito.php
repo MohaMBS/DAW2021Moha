@@ -45,6 +45,9 @@ if (!isset($_SESSION["control"])){
                     foreach ($_SESSION["carritoUser"] as &$value) {
                         echo (BuscarPro("",true,$value));
                         $_SESSION["precioPagar"]+=buscarPrecio($value);
+                        $precio=intval(str_replace(',','.',$_SESSION["precioPagar"]));
+                        $precioFinal=($precio*100);
+                        echo $precioFinal;
                     }
                     ?>
                     </tr>
