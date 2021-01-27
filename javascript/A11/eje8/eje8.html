@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A11 Eje8</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <style>
+  #sortable1, #sortable2 {
+    border: 1px solid ;
+    width: 142px;
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+  }
+  #sortable1 li, #sortable2 li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 120px;
+  }
+  .elementos{
+    color:red;
+  }
+  </style>
+</head>
+<body>
+ 
+<ul id="sortable1" class="connectedSortable">
+  <li class=".elementos">A</li>
+  <li class=".elementos">B</li>
+  <li class=".elementos">C</li>
+  <li class=".elementos">D</li>
+  <li class=".elementos">E</li>
+</ul>
+ 
+<ul id="sortable2" class="connectedSortable">
+  <li>F</li>
+</ul>
+</body>
+<script src="eje8.js"></script>
+</html>

@@ -1,0 +1,21 @@
+lista=[];
+document.getElementById("af").addEventListener("click",()=>{
+    lista.push(document.getElementById("campo").value)
+    document.getElementById("numero").innerHTML=lista.join("-");
+    document.getElementById("campo").value="";
+})
+document.getElementById("tf").addEventListener("click",()=>{
+    lista.pop(document.getElementById("campo").value)
+    document.getElementById("numero").innerHTML=lista.join("-");
+    document.getElementById("campo").value="";
+})
+document.getElementById("ap").addEventListener("click",()=>{
+    lista.unshift(document.getElementById("campo").value)
+    document.getElementById("numero").innerHTML=lista.join("-");
+    document.getElementById("campo").value="";
+})
+document.getElementById("tp").addEventListener("click",()=>{
+    lista.shift(document.getElementById("campo").value)
+    document.getElementById("numero").innerHTML=lista.join("-");
+    document.getElementById("campo").value="";
+})

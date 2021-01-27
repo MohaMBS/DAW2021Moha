@@ -1,0 +1,39 @@
+html,body {
+    margin: 0px;
+    background-color: #2F4F30;
+    color: white;
+}
+.titol {
+
+ text-align: center;
+ background-color: black;
+ color: white;
+ padding: 20px;
+ font-size: 25px;
+ 
+}
+.subtitol {
+
+    text-align: center;
+    background-color: navy;
+    color: white;
+    padding: 7px;
+    font-size: 25px;
+    
+}
+.cartah {
+    position: relative;
+    width: 150px;
+    left: 100px;
+    margin-left: -75px;
+}
+.cartac {
+    position: relative;
+    width: 150px;
+    left: 100px;
+    margin-left: -75px;
+}
+#jugador-cartes {
+    height: 240 px;
+
+} 

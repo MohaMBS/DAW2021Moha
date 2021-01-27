@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body{
+            background: rgb(63,94,251);
+            background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+        }
+        .X{
+            text-align: center;
+            background-color:orange!important;
+            color: white;
+            border-left: solid 2px black;
+            border-top: solid 2px black;;
+            border-right: solid 2px black;
+            border-bottom: solid 2px black;;
+            width: 25px;
+        }
+        .anadir{
+            text-align: center;
+            background-color:gray;
+            color: white;
+            border-left: solid 2px black;
+            border-top: solid 2px black;;
+            border-right: solid 2px black;
+            border-bottom: solid 2px black;;
+            width: 25px;
+        }
+        .descrp{
+            padding-left: 0.5em;
+            width: 200px;
+        }
+        .activites{
+            margin-top:5px;
+            border-left: solid 1px black;
+            border-top: solid 1px black;;
+            border-right: solid 1px black;
+            border-bottom: solid 1px black;;
+        }
+        .tabla{
+            margin-top:5px;
+            border-left: solid 1px black;
+            border-top: solid 1px black;;
+            border-right: solid 1px black;
+            border-bottom: solid 1px black;;
+        }
+        #titulo{
+            margin-top:300px;
+        }
+        tr, table{
+            background: rgb(34,193,195);
+            background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);      
+        }
+        tr.nueva > td{
+            border:solid 1px;
+            border-color: gray;
+            background-color:lightgrey;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1 id="titulo>">AGENDA</h1>
+    <div>
+        <table class="tabla">
+            <tr id="opciones">
+                <td>
+                    <input class="fecha" size="9" type="date" placeholder="1-1-2001">
+                </td>
+                <td class="descrp">
+                    <input class="queHacer" size="23" type="text" placeholder="Name">
+                </td>
+                <td class="anadir">
+                    añadir
+                </td>
+                <td>
+                    <input id="infobuscar" type="text" placeholder="Escribe el nombre de la tarea a buscar.">
+                </td>
+                <td>
+                    <input id="botonBuscar" type="button" value="Buscar">
+                </td>
+                
+            </tr>
+        </table>
+        <table id="ntable" class="tabla" style="width:50%;">
+
+        </table>
+    </div>
+    </center>
+    <script src="./a2.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>BUSCAMINAS</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+      td{
+        width: 50px;
+        height: 50px;
+        text-align: center;
+      }
+      .barraArriba {
+        background-color: #afbcd6;
+        width: 38.4%;
+        display: flex;
+   
+      }
+
+      #tiempo {
+        margin-top: 2.4%;
+        margin-left: 2%;
+        font-size:20px;
+        color:#434343;
+      }
+      .tablero{
+				width: 420px;
+				height: 460px;								
+				border: 1px solid black;
+				margin-left: 33%;
+				margin-top: 120px;				
+			}
+
+			.tablero div{
+				width: 40px;
+				height: 40px;
+				border: 1px solid black;
+				float: left;
+				background-color: #05abe0;				
+				font-size: 30;	
+				text-align: center;
+			}
+      .tiempo{
+				width: 420px;
+				height: 40px;
+				border: 1px solid black;
+				float: left;
+        margin-left: 33%;
+				background-color: aqua;				
+				font-size: 30;
+				text-align: center;
+			}
+      .boton{
+        float: left;
+        margin-left: 40%;
+        margin-top:1em;
+      }
+      #tablerominas{
+        background: rgb(238,174,202);
+        background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+      }
+      img{
+        width:40px;
+        height: 40px;
+      }
+    </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <div class="tiempo">
+        <p>TEMPS TRANSCORREGUT EN S:<span id="tiempo">0</span></p>
+      </div>
+    </tr>
+    <tr>
+      <div id="tablerominas" class="tablero">
+      </div>
+    </tr>
+    <tr>
+      <div class="boton"><button id="start">Iniciar</button>
+      <button id="stop">Parar</button>
+      <button id="restart" >Reiniciar</button>
+        <label id="contadorClick"></label></div>
+    </tr>
+  </table>
+        
+  <script src="./buscaMinas.js"></script></body>
+</body>
+</html>
